@@ -39,7 +39,21 @@ public class books{
 		return shelf_ID; 
 	}
 
-	
+	public void setbbook_ID(int id) { 
+		ISBN=id; 
+	}
+
+	public void setName(String name) {
+	 	bookname=name;
+	}
+
+	public void setauthor(String name) {
+	 	author=name;
+	}
+
+	public void setedition(int e) { 
+		edition_b=e; 
+	}
 
 	public void print(){
 		 System.out.println("books ID=" + ISBN); 

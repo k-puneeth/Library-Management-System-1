@@ -1,7 +1,7 @@
 import java.lang.*;
 
 public class shelf{
-	
+
 	int shelf_ID;
 	int snumber;
 	int book_ID;
@@ -19,6 +19,10 @@ public class shelf{
 		return shelf_ID; 
 	}
 
+	public void setshelfID(int s) { 
+		shelf_ID=s; 
+	}
+
 	public void setshelf(int sn){ 
 		snumber=sn ;
 	}
@@ -26,6 +30,7 @@ public class shelf{
 	public int getshelfN() {
 	 	return snumber;
 	}
+
 
 	public void print(){
 		 System.out.println("shelf ID=" + shelf_ID); 

@@ -27,6 +27,10 @@ public class borrowable_books{
 	 	return status;
 	}
 
+	public void setstatus(boolean b) {
+	 	status=b;
+	}
+
 	public void print(){
 		 System.out.println("borrowable_books ID=" + bbook_ID); 
 		 System.out.println("borrowable_books name=" + bbookname);
