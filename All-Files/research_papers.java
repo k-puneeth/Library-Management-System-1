@@ -8,17 +8,17 @@ public class research_papers{
 	public research_papers() { }
 	public research_papers (int a,int b,String s1,String s2){ research_id=a; faculty_id=b;topic=s1;faculty_name=s2;  }
     
-    public String getresearch_id() { return research_id; }
+    public int getresearch_id() { return research_id; }
     public void setresearch_id(int s){ research_id=s; }
     
 	public int getfaculty_id() { return faculty_id; }
     public void setfaculty_id(int s){ faculty_id = s; }
 
-    public int get_topic() { return topic; }
-    public void set_topic(int s){ topic = s; }
+    public String get_topic() { return topic; }
+    public void set_topic(String s){ topic = s; }
     
-    public int getfaculty_name() { return faculty_name; }
-    public void setfaculty_name(Date s) {faculty_name  = s; }
+    public String getfaculty_name() { return faculty_name; }
+    public void setfaculty_name(String s) {faculty_name  = s; }
     
     public void print()
     { 

@@ -6,7 +6,7 @@ public class admin{
 	public admin() { }
 	public admin (int a,int b){ admin_id=a; salary=b; }
     
-    public String getadmin_id() { return admin_id; }
+    public int getadmin_id() { return admin_id; }
     public void setadmin_id(int s){ admin_id=s; }
     
 	public int get_salary() { return salary; }

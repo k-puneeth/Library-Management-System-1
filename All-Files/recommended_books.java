@@ -14,10 +14,10 @@ public class recommended_books{
     public int getfaculty_id() { return faculty_id; }
     public void setfaculty_id(int s){ faculty_id = s; }
     
-    public int getbook_name() { return book_name; }
+    public String getbook_name() { return book_name; }
     public void setbook_name(String s){ book_name = s; }
     
-    public int getfaculty_name() { return faculty_name; }
+    public String getfaculty_name() { return faculty_name; }
     public void setfaculty_name(String s){ faculty_name = s; }
     
     public void print()
