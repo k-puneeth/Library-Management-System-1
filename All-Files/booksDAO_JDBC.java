@@ -27,11 +27,12 @@ public class booksDAO_JDBC implements booksDAO {
 			while(rs.next()){
 				//Retrieve by column bookname
 				int n = rs.getInt("ISBN");
+				String bookname = rs.getString("bookname");
+				String author = rs.getString("author");
+				int edition = rs.getInt("edition_b");
+				int shelf = rs.getInt("shelf_ID");
+				
 				if(n==id){
-					String bookname = rs.getString("bookname");
-					String author = rs.getString("author");
-					int edition = rs.getInt("edition_b");
-					int shelf = rs.getInt("shelf_ID");
 					bk.setbook_ID(n);
 					bk.setName(bookname);
 					bk.setauthor(author);
@@ -50,6 +51,88 @@ public class booksDAO_JDBC implements booksDAO {
 		// Add exception handling when there is no matching record
 		return bk;
 	}
+
+	@Override
+	public books getbookByName(String name) {
+		books bk = new books();
+		String sql;
+		Statement stmt = null;
+		
+		try{
+			stmt = dbConnection.createStatement();
+			sql = "select ISBN, bookname, author, edition_b, shelf_ID from books";
+			ResultSet rs = stmt.executeQuery(sql);
+																																																																																																																																																																																			
+			//STEP 5: Extract data from result set
+			while(rs.next()){
+				//Retrieve by column bookname
+				int n = rs.getInt("ISBN");
+				String bookname = rs.getString("bookname");
+				String author = rs.getString("author");
+				int edition = rs.getInt("edition_b");
+				int shelf = rs.getInt("shelf_ID");
+
+				if(name.equals(bookname)){
+					bk.setbook_ID(n);
+					bk.setName(bookname);
+					bk.setauthor(author);
+					bk.setedition(edition);
+					bk.setshelf_ID(shelf);
+					break;
+				}
+				// Add exception handling here if more than one row is returned
+			}
+		} catch (SQLException ex) {
+		    // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+		    System.out.println("SQLState: " + ex.getSQLState());
+		    System.out.println("VendorError: " + ex.getErrorCode());
+		}
+		// Add exception handling when there is no matching record
+		return bk;
+	}
+
+	@Override
+	public books getbookByAuthor(String author) {
+		books bk = new books();
+		String sql;
+		Statement stmt = null;
+		
+		try{
+			stmt = dbConnection.createStatement();
+			sql = "select ISBN, bookname, author, edition_b, shelf_ID from books";
+			ResultSet rs = stmt.executeQuery(sql);
+																																																																																																																																																																																			
+			//STEP 5: Extract data from result set
+			while(rs.next()){
+				//Retrieve by column bookname
+				int n = rs.getInt("ISBN");
+				String bookname = rs.getString("bookname");
+				String a = rs.getString("author");
+				int edition = rs.getInt("edition_b");
+				int shelf = rs.getInt("shelf_ID");
+				
+
+				if(a.equals(author)){
+					bk.setbook_ID(n);
+					bk.setName(bookname);
+					bk.setauthor(a);
+					bk.setedition(edition);
+					bk.setshelf_ID(shelf);	
+					break;
+				}
+				// Add exception handling here if more than one row is returned
+			}
+		} catch (SQLException ex) {
+		    // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+		    System.out.println("SQLState: " + ex.getSQLState());
+		    System.out.println("VendorError: " + ex.getErrorCode());
+		}
+		// Add exception handling when there is no matching record
+		return bk;
+	}
+
 
 	@Override
 	public void addbook(books b,shelf s) {
