@@ -1,11 +1,11 @@
 import java.lang.*;
 
 public class Librarian{
-	String librarian_ID;
+	int librarian_ID;
 	int salary;
 	String work_shift;
 
-	public String getLibrarianId(){return librarian_ID;}
+	public int getLibrarianId(){return librarian_ID;}
 	public int getLibrarianSalary(){return salary;}
 	public String getLibrarianWorkShift() {return work_shift;}
 	// public Student() { }

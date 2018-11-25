@@ -1,10 +1,10 @@
 import java.lang.*;
 
 public class Borrower{
-	String b_ID;
+	int b_ID;
 	String borrower_type;
 	public String getBorrowerType(){return borrower_type;}
-	public String getBorrowerId(){return b_ID;}
+	public int getBorrowerId(){return b_ID;}
 	// public Student() { }
 	// public Student (String s, int r){ rollno = r; name = s; }
 	// public String getName() { return name; }

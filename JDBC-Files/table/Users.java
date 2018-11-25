@@ -1,12 +1,12 @@
 import java.lang.*;
 
 public class Users{
-	String users_ID;
+	int users_ID;
 	String username;
 	String profession;
 	// public Student() { }
 	// public Student (String s, int r){ rollno = r; name = s; }
-	public String getUsersUserName() { return username; }
+	public int getUsersUserName() { return username; }
 	public int getUsersUsersId() { return users_ID; }
 	public String getUsersProfession() { return profession; }
 	// public void setName(String s){ name = s; }
