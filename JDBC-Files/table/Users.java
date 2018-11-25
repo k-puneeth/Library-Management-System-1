@@ -6,9 +6,7 @@ public class Users{
 	String profession;
 	// public Student() { }
 	// public Student (String s, int r){ rollno = r; name = s; }
-	public int getUsersUserName() { return username; }
-	public int getUsersUsersId() { return users_ID; }
-	public String getUsersProfession() { return profession; }
+	// public String getName() { return name; }
 	// public void setName(String s){ name = s; }
 	// public int getRollno() { return rollno; }
 	// public void setRollno(int s){ rollno = s; }

@@ -3,8 +3,6 @@ import java.lang.*;
 public class Borrower{
 	int b_ID;
 	String borrower_type;
-	public String getBorrowerType(){return borrower_type;}
-	public int getBorrowerId(){return b_ID;}
 	// public Student() { }
 	// public Student (String s, int r){ rollno = r; name = s; }
 	// public String getName() { return name; }
