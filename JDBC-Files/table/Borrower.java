@@ -2,7 +2,6 @@ import java.lang.*;
 
 public class Borrower{
 	String b_ID;
-	String bname;
 	String borrower_type;
 	// public Student() { }
 	// public Student (String s, int r){ rollno = r; name = s; }

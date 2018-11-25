@@ -2,7 +2,6 @@ import java.lang.*;
 
 public class Librarian{
 	int librarian_ID;
-	String lname;
 	int salary;
 	String work_shift;
 	// public Student() { }

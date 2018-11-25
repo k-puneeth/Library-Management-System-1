@@ -3,7 +3,6 @@ import java.lang.*;
 public class reference_books{
 
 	int CR_ID;
-	String CRname;
 
 	public reference_books(){ 
 	}
@@ -17,9 +16,6 @@ public class reference_books{
 		return CR_ID; 
 	}
 
-	public String getName() {
-	 	return CRname;
-	}
 
 	public void print(){
 		 System.out.println("reference_books ID=" + CR_ID); 
