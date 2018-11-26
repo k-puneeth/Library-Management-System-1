@@ -7,7 +7,7 @@ public interface booksDAO{
 	public books getbookByName(String name);
 	public books getbookByAuthor(String author);
 	public void addbook(books b,shelf s);
-	public void removebook(books b);	
-	
+	public void removebook(books b);
+
 }
 

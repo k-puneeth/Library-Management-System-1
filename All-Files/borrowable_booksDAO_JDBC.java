@@ -3,20 +3,21 @@ import java.util.List;
 import java.sql.*;
 
 
-public class booksDAO_JDBC implements booksDAO {
+public class borrowable_booksDAO_JDBC implements borrowable_booksDAO {
 																																																																																																																																																																																																																																															Connection dbConnection;
 
-	public booksDAO_JDBC(Connection dbconn){
+	public borrowable_booksDAO_JDBC(Connection dbconn){
 		// JDBC driver bookname and database URL
  		//  Database credentials
 		dbConnection = dbconn;
 	}
 
 	@Override
-	public books getbookByKey(int id) {
-		books bk = new books();
-		String sql;
+	public borrowable_books getbookByKey(int id) {
+		borrowable_books bk = new borrowable_books();
+		String sql,sql2;
 		Statement stmt = null;
+		Statement stmt2 = null;
 		
 		try{
 			stmt = dbConnection.createStatement();
@@ -42,6 +43,25 @@ public class booksDAO_JDBC implements booksDAO {
 				}
 				// Add exception handling here if more than one row is returned
 			}
+
+			stmt2 = dbConnection.createStatement();
+			sql2 = "select bbook_ID,status from borrowable_books";
+			rs = stmt2.executeQuery(sql2);
+																																																																																																																																																																																			
+			//STEP 5: Extract data from result set
+			while(rs.next()){
+				//Retrieve by column bookname
+				int n = rs.getInt("bbook_ID");
+				boolean s = rs.getBoolean("status");
+				
+				
+				if(n==id){
+					bk.setbbook_ID(n);
+					bk.setstatus(s);
+					break;
+				}
+				// Add exception handling here if more than one row is returned
+			}
 		} catch (SQLException ex) {
 		    // handle any errors
 		    System.out.println("SQLException: " + ex.getMessage());
@@ -53,10 +73,11 @@ public class booksDAO_JDBC implements booksDAO {
 	}
 
 	@Override
-	public books getbookByName(String name) {
-		books bk = new books();
-		String sql;
+	public borrowable_books getbookByName(String name) {
+		borrowable_books bk = new borrowable_books();
+		String sql,sql2;
 		Statement stmt = null;
+		Statement stmt2 = null;
 		
 		try{
 			stmt = dbConnection.createStatement();
@@ -82,6 +103,25 @@ public class booksDAO_JDBC implements booksDAO {
 				}
 				// Add exception handling here if more than one row is returned
 			}
+
+			stmt2 = dbConnection.createStatement();
+			sql2 = "select bbook_ID,status from borrowable_books";
+			rs = stmt2.executeQuery(sql2);
+																																																																																																																																																																																			
+			//STEP 5: Extract data from result set
+			while(rs.next()){
+				//Retrieve by column bookname
+				int n = rs.getInt("bbook_ID");
+				boolean s = rs.getBoolean("status");
+				
+				
+				if(n==bk.getbook_ID()){
+					bk.setbbook_ID(n);
+					bk.setstatus(s);
+					break;
+				}
+				// Add exception handling here if more than one row is returned
+			}
 		} catch (SQLException ex) {
 		    // handle any errors
 		    System.out.println("SQLException: " + ex.getMessage());
@@ -93,10 +133,11 @@ public class booksDAO_JDBC implements booksDAO {
 	}
 
 	@Override
-	public books getbookByAuthor(String author) {
-		books bk = new books();
-		String sql;
+	public borrowable_books getbookByAuthor(String author) {
+		borrowable_books bk = new borrowable_books();
+		String sql,sql2;
 		Statement stmt = null;
+		Statement stmt2 = null;
 		
 		try{
 			stmt = dbConnection.createStatement();
@@ -123,6 +164,26 @@ public class booksDAO_JDBC implements booksDAO {
 				}
 				// Add exception handling here if more than one row is returned
 			}
+
+			stmt2 = dbConnection.createStatement();
+			sql2 = "select bbook_ID,status from borrowable_books";
+			rs = stmt2.executeQuery(sql2);
+																																																																																																																																																																																			
+			//STEP 5: Extract data from result set
+			while(rs.next()){
+				//Retrieve by column bookname
+				int n = rs.getInt("bbook_ID");
+				boolean s = rs.getBoolean("status");
+				
+				
+				if(n==bk.getbook_ID()){
+					bk.setbbook_ID(n);
+					bk.setstatus(s);
+					break;
+				}
+				// Add exception handling here if more than one row is returned
+			}
+
 		} catch (SQLException ex) {
 		    // handle any errors
 		    System.out.println("SQLException: " + ex.getMessage());
@@ -135,9 +196,8 @@ public class booksDAO_JDBC implements booksDAO {
 
 
 	@Override
-	public void addbook(books b,shelf s) {
-
-
+	public void addbook(borrowable_books b,shelf s) {
+		
 		PreparedStatement preparedStatement2 = null;																																																																																																																																													
 		String sql;
 		sql = "insert into books(ISBN, bookname, author, edition_b, shelf_ID) values (?,?,?,?,?)";
@@ -167,10 +227,37 @@ public class booksDAO_JDBC implements booksDAO {
 		} catch (SQLException e) {
  			System.out.println(e.getMessage());
  		}
+
+ 		PreparedStatement preparedStatement3 = null;																																																																																																																																													
+		sql = "insert into borrowable_books(bbook_ID,status) values (?,?)";
+
+		try {
+			preparedStatement3 = dbConnection.prepareStatement(sql);
+ 
+			preparedStatement3.setInt(1, b.getbbook_ID());
+			preparedStatement3.setBoolean(2, b.getstatus());
+
+ 
+			// execute insert SQL stetement
+			preparedStatement3.executeUpdate();
+ 
+			System.out.println("borrowable_books: ISBN " + b.getbbook_ID() 
+				+ " status of the book "+ b.getstatus() + " , added to the database");
+		} catch (SQLException e) {
+ 			System.out.println(e.getMessage());
+ 		}
+
+		try{
+			if (preparedStatement3 != null) {
+				preparedStatement3.close();
+			}
+		} catch (SQLException e) {
+ 			System.out.println(e.getMessage());
+ 		}
 	}
 
 		@Override
-	public void removebook(books b) {
+	public void removebook(borrowable_books b) {
 		PreparedStatement preparedStatement = null;																																																																																																																																													
 		String sql;
 		sql = "DELETE FROM books WHERE bookname=?";
@@ -192,6 +279,32 @@ public class booksDAO_JDBC implements booksDAO {
 		try{
 			if (preparedStatement != null) {
 				preparedStatement.close();
+			}
+		} catch (SQLException e) {
+ 			System.out.println(e.getMessage());
+ 		}
+
+ 		PreparedStatement preparedStatement1 = null;
+ 		String sql1;																																																																																																																																													
+		sql1 = "DELETE FROM borrowable_books WHERE bbook_ID=?";
+
+		try {
+			preparedStatement1 = dbConnection.prepareStatement(sql1);
+ 
+			preparedStatement1.setInt(1, b.getbbook_ID());
+ 
+			// execute insert SQL stetement
+			preparedStatement1.executeUpdate();
+ 
+			System.out.println("borrowable_books: name " + b.getName() 
+				+ ", deleted from the database");
+		} catch (SQLException e) {
+ 			System.out.println(e.getMessage());
+ 		}
+
+		try{
+			if (preparedStatement1 != null) {
+				preparedStatement1.close();
 			}
 		} catch (SQLException e) {
  			System.out.println(e.getMessage());

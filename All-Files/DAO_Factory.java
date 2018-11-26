@@ -19,7 +19,10 @@ public class DAO_Factory{
 	Connection dbconnection = null;
 
 	// You can add additional DAOs here as needed. Generally one DAO per class
+	shelfDAO shelfDAO = null;
 	booksDAO booksDAO = null;
+	borrowable_booksDAO bbooksDAO = null;
+
 
 	boolean activeConnection = false;
 
@@ -49,6 +52,18 @@ public class DAO_Factory{
 		    System.out.println("VendorError: " + ex.getErrorCode());
 		}
 	}
+
+	public shelfDAO getshelfDAO() throws Exception
+	{
+		if( activeConnection == false )
+			throw new Exception("Connection not activated...");
+
+		if( shelfDAO == null )
+			shelfDAO = new shelfDAO_JDBC( dbconnection );
+
+		return shelfDAO;
+	}
+
 	public booksDAO getbooksDAO() throws Exception
 	{
 		if( activeConnection == false )
@@ -58,6 +73,17 @@ public class DAO_Factory{
 			booksDAO = new booksDAO_JDBC( dbconnection );
 
 		return booksDAO;
+	}
+
+	public borrowable_booksDAO getbbooksDAO() throws Exception
+	{
+		if( activeConnection == false )
+			throw new Exception("Connection not activated...");
+
+		if( bbooksDAO == null )
+			bbooksDAO = new borrowable_booksDAO_JDBC( dbconnection );
+
+		return bbooksDAO;
 	}
 	public void deactivateConnection()
 	{
